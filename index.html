@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Mission to Mars - A WebScraping Challenge</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav">
+      <h4>An Bui's Mars Blog</h4>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#section1"> Mars Image Collection</a></li>
+        <li><a href="#section2">Mars Facts</a></li>
+        <li><a href="#section3">Mars Hemispheres</a></li>
+        <li><a href="#section3">Mars Weather</a></li>
+        <li><a href="#section3">Latest News</a></li>
+      </ul><br>
+      <div class="input-group">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-success">Scrape New Data Now!</button>
+
+        </span>
+      </div>
+    </div>
+
+    <div class="col-sm-9">
+      <h4><small>RECENT POSTS</small></h4>
+      <hr>
+      <h1>Mission to Mars</h1>
+      <h3>Web Scraping Challenge with Beautiful Soup and Splinter Browser</h3>
+      <h5><span class="glyphicon glyphicon-time"></span> by An Bui</h5>
+ 
+      <p>
+      
+      </p>
+      <br><br>
+      
+      <h4><small>RECENT SCRAPE</small></h4>
+      <hr>
+      
+      <h5><span class="glyphicon glyphicon-time"></span>Latest Scrape Time: </h5>
+
+     
+      <p>
+      
+      <hr>
+
+      <h4>Leave a Comment:</h4>
+      <form role="form">
+        <div class="form-group">
+          <textarea class="form-control" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+      <br><br>
+      
+      
+
+<footer class="container-fluid">
+  <p>UCI Boot Camp Challenge 12</p>
+</footer>
+
+</body>
+</html>
+

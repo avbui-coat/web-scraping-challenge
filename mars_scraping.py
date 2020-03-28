@@ -4,11 +4,11 @@ from bs4 import BeautifulSoup as bs
 from splinter import Browser
 import time
 import requests
+import datetime as dt
 
 def news_scrape(browser):
 
     browser.visit("https://mars.nasa.gov/news/")
-    time.sleep(1)   
     news_soup = bs(browser.html, 'html.parser')
     results = news_soup.find_all('div', class_='slide')
 
@@ -60,26 +60,44 @@ def hemispheres(browser):
             hemisphere_title = result.find('div', class_='description').a.text
             hemisphere_url = result.find('div',class_='description').a['href']
         except AttributeError:
-            return None
-    return hemisphere_title, hemisphere_url
+            hemisphere_title = None
+            hemisphere_url = None
+    
+    hemispheres = {
+                "hemisphere": hemisphere_title,
+                "hemisphere_image": hemisphere_url}
+    return hemispheres
+
+def mars_fact():
+    try:
+        fact_df = pd.read_html("https://space-facts.com/mars/")[0]
+    except AttributeError:
+        return None
+    fact_df.columns=['Fact', 'Value']
+    fact_df.set_index('Fact', inplace=True)
+
+    return fact_df.to_html(classes="table table-striped")
 
 
-
-def scrape_all():
+def scrape():
 
     browser = Browser("chrome", executable_path="chromedriver", headless=True)
     news_title, news_p = news_scrape(browser)
+    time.sleep(1)
 
     data = {
         "news_title": news_title,
         "news_paragraph": news_p,
         "weather": mars_weather(browser),
         "featured_image": mars_image(browser),
-        "hemispheres": hemispheres(browser),
-        "facts": mars_facts(),
+        "hemispheres": hemispheres,
+        "facts": mars_fact(),
         "last_modified": dt.datetime.now()
     }
 
     browser.quit()
     return data
+
+if __name__ == "__main__":
+    print(scrape())
 
