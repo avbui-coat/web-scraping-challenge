@@ -41,15 +41,16 @@
     <div class="col-sm-3 sidenav">
       <h4>An Bui's Mars Blog</h4>
       <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="#section1"> Mars Image Collection</a></li>
-        <li><a href="#section2">Mars Facts</a></li>
-        <li><a href="#section3">Mars Hemispheres</a></li>
-        <li><a href="#section3">Mars Weather</a></li>
-        <li><a href="#section3">Latest News</a></li>
+        <li class="active"><a href="/mars_image"> Mars Image Collection</a></li>
+        <li class="active"><a href="/facts">Mars Facts</a></li>
+        <li class="active"><a href="/hemisphere">Mars Hemispheres</a></li>
+        <li class="active"><a href="/weather">Mars Weather</a></li>
+        <li class="active"><a href="/news">Latest News</a></li>
+
       </ul><br>
       <div class="input-group">
         <span class="input-group-btn">
-          <button type="submit" class="btn btn-success">Scrape New Data Now!</button>
+          <button type="submit" class="btn btn-success" href="/scrape">Scrape New Data Now!</button>
 
         </span>
       </div>
@@ -62,18 +63,32 @@
       <h3>Web Scraping Challenge with Beautiful Soup and Splinter Browser</h3>
       <h5><span class="glyphicon glyphicon-time"></span> by An Bui</h5>
  
-      <p>
+      <p><div class="row" id="mars-news">
+            <div class="col-md-12">
+              <div class="media">
+                <div class="media-body">
+                  <h2>Latest Mars News</h2>
+                  <h4 class="media-heading">{{mars.news_title}}</h4>
+                  <p>{{mars.news_paragraph}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
       
       </p>
       <br><br>
       
       <h4><small>RECENT SCRAPE</small></h4>
       <hr>
-      
-      <h5><span class="glyphicon glyphicon-time"></span>Latest Scrape Time: </h5>
+      <div class="row" id="mars-image">
+            <div class="col-md-12">
+                <h1>Mars Image</h1>
+                <imag src={{mars.featured_image}} class="img-responsive"
+                    alt="Responsive image"></imag>
+        </div>
 
      
-      <p>
+      
       
       <hr>
 
