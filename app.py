@@ -12,15 +12,26 @@ def index():
     mars = mongo.db.mars.find_one()
     return render_template("index.html", mars=mars)
 
+
 # @app.route("/mars_image")
 # def image():
 #     mars = mongo.db.mars.find_one()
-#     return render_template("index.html", mars=mars)
+#     return render_template("image.html", mars=mars)
 
 # @app.route("/news")
 # def news():
 #     mars = mongo.db.mars.find_one()
-#     return render_template("index.html", mars=mars)
+#     return render_template("mars_news.html", mars=mars)
+
+# @app.route("/weather")
+# def news():
+#     mars = mongo.db.mars.find_one()
+#     return render_template("weather.html", mars=mars)
+
+@app.route("/facts")
+def facts():
+    mars = mongo.db.mars.find_one()
+    return render_template("mars_facts.html", mars=mars)
 
 @app.route("/scrape")
 def scrape():
@@ -28,6 +39,8 @@ def scrape():
     mars_data = mars_scraping.scrape()
     mars.update({}, mars_data, upsert=True)
     return redirect("/", code=302)
+
+
 
 if __name__ == "__main__":
     app.run(debug = True)

@@ -71,7 +71,7 @@ def hemispheres(browser):
         try:
             hemisphere_title = result.find('div', class_='description').a.text
             hemisphere_url = result.find('div',class_='description').a['href']
-            hemisphere_img = f"https://astrogeology.usgs.gov/{hemisphere_url}"
+            hemisphere_img = f"https://astrogeology.usgs.gov{hemisphere_url}"
             hemi_title.append(hemisphere_title)
             hemi_img.append(hemisphere_img)
 
@@ -86,7 +86,8 @@ def hemispheres(browser):
 
 def mars_fact():
     try:
-        fact_df = pd.read_html("https://space-facts.com/mars/")[0]
+        fact_url="http://space-facts.com/mars/"
+        fact_df = pd.read_html(fact_url)[0]
     except AttributeError:
         return None
     fact_df.columns=['Fact', 'Value']

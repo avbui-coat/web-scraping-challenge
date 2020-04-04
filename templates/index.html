@@ -41,32 +41,35 @@
     <div class="col-sm-3 sidenav">
       <h4>An Bui's Mars Blog</h4>
       <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="/mars_image"> Mars Image Collection</a></li>
         <li class="active"><a href="/facts">Mars Facts</a></li>
         <li class="active"><a href="/hemisphere">Mars Hemispheres</a></li>
-        <li class="active"><a href="/weather">Mars Weather</a></li>
-        <li class="active"><a href="/news">Latest News</a></li>
 
-      </ul><br>
+      </ul>
+      <br>
+      <h4>Click Here To Scrape New Data</h4>
       <div class="input-group">
-        <span class="input-group-btn">
-          <!-- <button type="submit" class="btn btn-success"  -->
-            <!-- <a href="/scrape" role="button"></a>Scrape New Data Now! -->
-            <a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a>
-        </span>
+          <span class="input-group-btn">
+              <a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a>
+          </span>
       </div>
     </div>
 
     <div class="col-sm-9">
-      <h4><small>RECENT POSTS</small></h4>
+      
       <hr>
       <h1>Mission to Mars</h1>
       <h3>Web Scraping Challenge with Beautiful Soup and Splinter Browser</h3>
       <h5><span class="glyphicon glyphicon-time"></span> by An Bui</h5>
  
       <p>
-        <h4><small>RECENT SCRAPE (click "Scrape New Data Button" to update)</small></h4>
-        
+        <hr>
+        <h4><small>RECENT SCRAPE </small></h4>
+          <div class="row" id="mars-image">
+              <div class="col-md-12">
+                  <h1>Mars Image</h1>
+                  <imag src={{mars.featured_image}} class="img-responsive"
+                      alt="Responsive image"></imag>
+          </div>
         <hr>
         <div class="row" id="mars-news">
             <div class="col-md-12">
@@ -86,7 +89,7 @@
                 <div class="media">
                   <div class="media-body">
                     <h2>Latest Mars Weather</h2>
-                    <h6 class="media-heading">{{mars.weather}}</h6>
+                    <p> {{mars.weather}}</p>
     
                   </div>
                 </div>
@@ -94,13 +97,23 @@
         </div>
         <hr>
 
-        <div class="row" id="mars-fact">
+        <div class="row" id="mars-hemispheres" style="margin-top:80px;">
             <div class="col-md-12">
                 <div class="media">
                   <div class="media-body">
                     <h2>Mars Hemispheres</h2>
-                    <h6 class="media-heading">{{mars.hemispheres.hemisphere}}</h6>
-                      <img src= "{{mars.hemispheres.hemisphere_image}}" alt="Hemisphere image"></imag>
+                   
+                      {% for result in mars.hemispheres %}
+                            <div class="thumbnail">
+                              <img src="{{result.hemisphere_image | default('static/images/error.png', true)}}"
+                                  alt="hemisphere_image"></img>
+                                <div class="caption">
+                                  <h3>{{result.hemisphere}}</h3>
+                                </div>
+                            </div>
+                      {% endfor %}
+                    <!-- <h6 class="media-heading">{{mars.hemispheres.hemisphere}}</h6>
+                      <img href= "{{mars.hemispheres.hemisphere_image}}" alt="Hemisphere image"></imag> -->
     
                   </div>
                 </div>
@@ -112,8 +125,8 @@
             <div class="col-md-12">
                 <div class="media">
                   <div class="media-body">
-                    <h2>Mars Facts</h2>
-                    <h6 class="media-heading">{{mars.facts}}</h6>
+                    <h2 class="media-heading">Mars Facts</h2>
+                    {{mars.facts| safe}}
     
                   </div>
                 </div>
@@ -124,12 +137,7 @@
       
       
       
-      <div class="row" id="mars-image">
-            <div class="col-md-12">
-                <h1>Mars Image</h1>
-                <imag src={{mars.featured_image}} class="img-responsive"
-                    alt="Responsive image"></imag>
-        </div>
+      
 
       
       
