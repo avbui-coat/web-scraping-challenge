@@ -50,8 +50,9 @@
       </ul><br>
       <div class="input-group">
         <span class="input-group-btn">
-          <button type="submit" class="btn btn-success" href="/scrape">Scrape New Data Now!</button>
-
+          <!-- <button type="submit" class="btn btn-success"  -->
+            <!-- <a href="/scrape" role="button"></a>Scrape New Data Now! -->
+            <a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a>
         </span>
       </div>
     </div>
@@ -63,7 +64,11 @@
       <h3>Web Scraping Challenge with Beautiful Soup and Splinter Browser</h3>
       <h5><span class="glyphicon glyphicon-time"></span> by An Bui</h5>
  
-      <p><div class="row" id="mars-news">
+      <p>
+        <h4><small>RECENT SCRAPE (click "Scrape New Data Button" to update)</small></h4>
+        
+        <hr>
+        <div class="row" id="mars-news">
             <div class="col-md-12">
               <div class="media">
                 <div class="media-body">
@@ -74,12 +79,51 @@
               </div>
             </div>
           </div>
-      
+
+        <hr>
+        <div class="row" id="mars-weather">
+            <div class="col-md-12">
+                <div class="media">
+                  <div class="media-body">
+                    <h2>Latest Mars Weather</h2>
+                    <h6 class="media-heading">{{mars.weather}}</h6>
+    
+                  </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        <div class="row" id="mars-fact">
+            <div class="col-md-12">
+                <div class="media">
+                  <div class="media-body">
+                    <h2>Mars Hemispheres</h2>
+                    <h6 class="media-heading">{{mars.hemispheres.hemisphere}}</h6>
+                      <img src= "{{mars.hemispheres.hemisphere_image}}" alt="Hemisphere image"></imag>
+    
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <div class="row" id="mars-fact">
+            <div class="col-md-12">
+                <div class="media">
+                  <div class="media-body">
+                    <h2>Mars Facts</h2>
+                    <h6 class="media-heading">{{mars.facts}}</h6>
+    
+                  </div>
+                </div>
+            </div>
+        </div>
       </p>
       <br><br>
       
-      <h4><small>RECENT SCRAPE</small></h4>
-      <hr>
+      
+      
       <div class="row" id="mars-image">
             <div class="col-md-12">
                 <h1>Mars Image</h1>
@@ -87,10 +131,8 @@
                     alt="Responsive image"></imag>
         </div>
 
-     
       
       
-      <hr>
 
       <h4>Leave a Comment:</h4>
       <form role="form">

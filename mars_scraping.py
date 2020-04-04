@@ -9,6 +9,7 @@ import datetime as dt
 def news_scrape(browser):
 
     browser.visit("https://mars.nasa.gov/news/")
+    time.sleep(2)
     news_soup = bs(browser.html, 'html.parser')
     results = news_soup.find_all('div', class_='slide')
 
@@ -25,18 +26,24 @@ def news_scrape(browser):
 def mars_weather(browser):
 
     weather_url = "https://twitter.com/marswxreport?lang=en"
-    browser.visit(weather_url)
-    weather_soup = bs(browser.html, 'html.parser')
-    weather_results = weather_soup.find_all('div', class_="css-901oao r-hkyrab r-1qd0xha r-a023e6 r-16dba41 r-ad9z0x r-bcqeeo r-bnwqim r-qvutc0")
-
-    for result in weather_results:
-        weather_text = result.span.text
     
+    browser.visit(weather_url)
+    time.sleep(5)
+    weather_soup = bs(browser.html, 'html.parser')
+      
+    weather_results = weather_soup.find_all('span')
+    for result in weather_results:
+        # weather_text = result.span.text
+        if 'InSight sol ' in result.text:
+            weather_text = result.text
+            break
+
     return weather_text
 
 def mars_image(browser):
     featured_image_url = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
     browser.visit(featured_image_url)
+    time.sleep(2)
     image_soup = bs(browser.html, 'html.parser')
     image_results = image_soup.find_all('li', class_="slide")
 
@@ -52,20 +59,29 @@ def mars_image(browser):
 def hemispheres(browser):
     astrogeology_url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
     browser.visit(astrogeology_url)
+    time.sleep(2)
     hemisphere_soup = bs(browser.html, 'html.parser')
     hemisphere_results = hemisphere_soup.find_all('div', class_="item")
 
+    hemi_title=[]
+    hemi_img=[]
+
     for result in hemisphere_results:
+        
         try:
             hemisphere_title = result.find('div', class_='description').a.text
             hemisphere_url = result.find('div',class_='description').a['href']
+            hemisphere_img = f"https://astrogeology.usgs.gov/{hemisphere_url}"
+            hemi_title.append(hemisphere_title)
+            hemi_img.append(hemisphere_img)
+
         except AttributeError:
             hemisphere_title = None
-            hemisphere_url = None
+            hemisphere_img = None
     
     hemispheres = {
-                "hemisphere": hemisphere_title,
-                "hemisphere_image": hemisphere_url}
+                "hemisphere": hemi_title,
+                "hemisphere_image": hemi_img}
     return hemispheres
 
 def mars_fact():
@@ -90,7 +106,7 @@ def scrape():
         "news_paragraph": news_p,
         "weather": mars_weather(browser),
         "featured_image": mars_image(browser),
-        "hemispheres": hemispheres,
+        "hemispheres": hemispheres(browser),
         "facts": mars_fact(),
         "last_modified": dt.datetime.now()
     }
