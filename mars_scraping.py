@@ -63,25 +63,21 @@ def hemispheres(browser):
     hemisphere_soup = bs(browser.html, 'html.parser')
     hemisphere_results = hemisphere_soup.find_all('div', class_="item")
 
-    hemi_title=[]
-    hemi_img=[]
+
+    hemispheres=[]
 
     for result in hemisphere_results:
-        
         try:
-            hemisphere_title = result.find('div', class_='description').a.text
-            hemisphere_url = result.find('div',class_='description').a['href']
+            hemisphere = result.find('div', class_='description').a.text
+            hemisphere_url = result.img['src']
             hemisphere_img = f"https://astrogeology.usgs.gov{hemisphere_url}"
-            hemi_title.append(hemisphere_title)
-            hemi_img.append(hemisphere_img)
+            hemispheres.append({'title':hemisphere, 'image': hemisphere_img})
+            
+            print(hemisphere)
+            
+        except AttributeError as e:
+            print(e)
 
-        except AttributeError:
-            hemisphere_title = None
-            hemisphere_img = None
-    
-    hemispheres = {
-                "hemisphere": hemi_title,
-                "hemisphere_image": hemi_img}
     return hemispheres
 
 def mars_fact():

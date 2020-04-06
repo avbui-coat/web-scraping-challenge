@@ -105,10 +105,10 @@
                    
                       {% for result in mars.hemispheres %}
                             <div class="thumbnail">
-                              <img src="{{result.hemisphere_image | default('static/images/error.png', true)}}"
+                              <img src="{{result.image | default('static/images/error.png', true)}}"
                                   alt="hemisphere_image"></img>
                                 <div class="caption">
-                                  <h3>{{result.hemisphere}}</h3>
+                                  <h6>{{result.title}}</h6>
                                 </div>
                             </div>
                       {% endfor %}
