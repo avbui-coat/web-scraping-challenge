@@ -13,20 +13,16 @@ def index():
     return render_template("index.html", mars=mars)
 
 
-# @app.route("/mars_image")
+# @app.route("/feature_img")
 # def image():
 #     mars = mongo.db.mars.find_one()
-#     return render_template("image.html", mars=mars)
+#     return render_template("feature_img.html", mars=mars)
 
-# @app.route("/news")
-# def news():
-#     mars = mongo.db.mars.find_one()
-#     return render_template("mars_news.html", mars=mars)
+@app.route("/hemisphere")
+def news():
+    mars = mongo.db.mars.find_one()
+    return render_template("hemisphere.html", mars=mars)
 
-# @app.route("/weather")
-# def news():
-#     mars = mongo.db.mars.find_one()
-#     return render_template("weather.html", mars=mars)
 
 @app.route("/facts")
 def facts():
